@@ -1,7 +1,7 @@
 
 # continual-object-instances
 
-Code for "Continual Learning of Object Instances", Implemented in PyTorch, https://arxiv.org/abs/2004.10862 
+Code for "Continual Learning of Object Instances", Implemented in PyTorch, [https://arxiv.org/abs/2004.10862](https://arxiv.org/abs/2004.10862)
 
 ## Abstract
 
@@ -19,7 +19,21 @@ Kishan Parshotam and Mert Kilickaya
 
 
 ## Installing
+Install the dependencies by creating the Conda environment `continual_objects` from the given `environment.yml` file and activating it.
+```bash
+conda env create -f environment.yml
+conda activate continual_objects
+```
 
+## Datasets
+Downloading the Cars3D dataset:
+```bash
+cd ./Cars3D
+chmod +x download.sh
+./download.sh
+```
+
+Render the 3D dataset with `Cars3D/render.m` script with MATLAB, or another renderer of your choice.
 
 ## Experiments
 
@@ -31,3 +45,15 @@ Kishan Parshotam and Mert Kilickaya
 
 
 ### Synthetic transfer model
+
+
+## Disclaimer
+This is not an official Prosus product. It is the outcome of an internal research project from the Prosus AI team.
+
+### About Prosus 
+Prosus is a global consumer internet group and one of the largest technology investors in the world. Operating and
+ investing globally in markets with long-term growth potential, Prosus builds leading consumer internet companies that empower people and enrich communities.
+For more information, please visit [www.prosus.com](www.prosus.com).
+
+## Contact information
+Please contact Kishan Parshotam `kishanarendra[at]gmail[dot]com` for issues and questions.
