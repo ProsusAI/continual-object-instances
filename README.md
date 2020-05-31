@@ -14,9 +14,15 @@ Kishan Parshotam and Mert Kilickaya
 
 
 ## Cite
-
-................................
-
+If you make use of this code, please cite our work:
+```
+@article{parshotam2020continual,
+  title={Continual Learning of Object Instances},
+  author={Parshotam, Kishan and Kilickaya, Mert},
+  journal={arXiv preprint arXiv:2004.10862},
+  year={2020}
+}
+```
 
 ## Installing
 Install the dependencies by creating the Conda environment `continual_objects` from the given `environment.yml` file and activating it.
