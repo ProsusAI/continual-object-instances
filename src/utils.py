@@ -16,12 +16,12 @@ def config():
                         help="sampling method")
     parser.add_argument('-sp', '--split_method', default="incremental",
                         help="split method")
-    parser.add_argument('-mo', '--model', default="lenet",
+    parser.add_argument('-mo', '--model', default="lenet", choices=["lenet", "resnet"],
                         help="backbone model")
-    parser.add_argument('-clm', '--continuous_learning_method', default="naive",
+    parser.add_argument('-clm', '--continuous_learning_method', default="naive", choices=["naive", "finetune", "lfl", "lwf", "ewc"],
                         help="continual learning approach")
-    parser.add_argument('-t', '--task_method', default="regression",
-                        help="regression or classification approach")
+    parser.add_argument('-t', '--task_method', default="regression", choices=["regression", "classification"],
+                        help="benchmark or NCE approach")
     parser.add_argument('-e', '--n_epochs', type=int, default=10,
                         help="define the number of epochs")
     parser.add_argument('--data_path', default="../../datasets/",
@@ -36,25 +36,26 @@ def config():
                         help="lfl weight in euclidean distance between anchors")
     parser.add_argument('-lamb_lwf', '--lambda_lwf', type=float, default=0.05,
                         help="lwf weight in knowledge distillation between anchors")
-    parser.add_argument('-p', '--print_every', type=int, default=100,
-                        help="print steps")
     parser.add_argument('-emb', '--embedding_dim', type=int, default=32,
                         help="embedding size")
+    parser.add_argument('-im', '--image_size', type=int, default=32,
+                        help="image size")                        
     parser.add_argument('-w', '--num_workers', type=int, default=1,
                         help="parallel workers")
-    parser.add_argument('-im', '--image_size', type=int, default=32,
-                        help="image size")
     parser.add_argument('-g', '--gpu', type=int, default=0,
                         help="GPU ID")
-    parser.add_argument('-n', '--neg_samples', type=int, default=1,
+    parser.add_argument('-p', '--print_every', type=int, default=100,
+                        help="print steps")
+    parser.add_argument('-n', '--neg_samples', type=int, default=9,
                         help="Number of negative samples for CE loss")
     parser.add_argument('-temp', '--temperature', type=float, default=1.0,
                         help="Temperature for softmax under the NCE setting")
-    parser.add_argument('--normalize', action='store_true')
-    parser.add_argument('--train_full', action='store_true')
-    parser.add_argument('--freeze', action='store_true')
     parser.add_argument('-lamb_ewc', '--lambda_ewc', type=float, default=0.05,
                         help="lambda ewc")
+    parser.add_argument('--normalize', action='store_true', help= "normalize network outputs")
+    parser.add_argument('--train_full', action='store_true', help="cumulative/offline training")
+    parser.add_argument('--freeze', action='store_true', help="freeze conv layers, used in Naive approach")
+
 
     args = parser.parse_args()
 

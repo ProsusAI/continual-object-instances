@@ -35,16 +35,76 @@ chmod +x Cars3D/download.sh
 Render the 3D dataset with `Cars3D/render.m` script with MATLAB, or another renderer of your choice.
 
 ## Experiments
+```bash
+usage: main.py [-h] [-d DATASET] [-ds DATA_SPLITS] [-s SAMPLING_METHOD]
+               [-sp SPLIT_METHOD] [-mo {lenet,resnet}]
+               [-clm {naive,finetune,lfl,lwf,ewc}]
+               [-t {regression,classification}] [-e N_EPOCHS]
+               [--data_path DATA_PATH] -o OUTPUT [-b BATCH_SIZE] [-l LR]
+               [-lamb LAMBDA_LFL] [-lamb_lwf LAMBDA_LWF] [-emb EMBEDDING_DIM]
+               [-im IMAGE_SIZE] [-w NUM_WORKERS] [-g GPU] [-p PRINT_EVERY]
+               [-n NEG_SAMPLES] [-temp TEMPERATURE] [-lamb_ewc LAMBDA_EWC]
+               [--normalize] [--train_full] [--freeze]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DATASET, --dataset DATASET
+                        dataset to process
+  -ds DATA_SPLITS, --data_splits DATA_SPLITS
+                        number of equal data partitions
+  -s SAMPLING_METHOD, --sampling_method SAMPLING_METHOD
+                        sampling method
+  -sp SPLIT_METHOD, --split_method SPLIT_METHOD
+                        split method
+  -mo {lenet,resnet}, --model {lenet,resnet}
+                        backbone model
+  -clm {naive,finetune,lfl,lwf,ewc}, --continuous_learning_method {naive,finetune,lfl,lwf,ewc}
+                        continual learning approach
+  -t {regression,classification}, --task_method {regression,classification}
+                        benchmark or NCE approach
+  -e N_EPOCHS, --n_epochs N_EPOCHS
+                        define the number of epochs
+  --data_path DATA_PATH
+                        root data folder
+  -o OUTPUT, --output OUTPUT
+                        output folder name folder
+  -b BATCH_SIZE, --batch_size BATCH_SIZE
+                        batch size
+  -l LR, --lr LR        learning rate
+  -lamb LAMBDA_LFL, --lambda_lfl LAMBDA_LFL
+                        lfl weight in euclidean distance between anchors
+  -lamb_lwf LAMBDA_LWF, --lambda_lwf LAMBDA_LWF
+                        lwf weight in knowledge distillation between anchors
+  -emb EMBEDDING_DIM, --embedding_dim EMBEDDING_DIM
+                        embedding size
+  -im IMAGE_SIZE, --image_size IMAGE_SIZE
+                        image size
+  -w NUM_WORKERS, --num_workers NUM_WORKERS
+                        parallel workers
+  -g GPU, --gpu GPU     GPU ID
+  -p PRINT_EVERY, --print_every PRINT_EVERY
+                        print steps
+  -n NEG_SAMPLES, --neg_samples NEG_SAMPLES
+                        Number of negative samples for CE loss
+  -temp TEMPERATURE, --temperature TEMPERATURE
+                        Temperature for softmax under the NCE setting
+  -lamb_ewc LAMBDA_EWC, --lambda_ewc LAMBDA_EWC
+                        lambda ewc
+  --normalize           normalize network outputs
+  --train_full          cumulative/offline training
+  --freeze              freeze conv layers, used in Naive approach
+```
 
 
 ### Benchmarking
-
+```bash
+python src/main.py --data_path DATA_PATH -d Cars3D -ds 10 -clm CONTINUOUS_LEARNING_METHOD -m MODEL -t regression
+```
 
 ### Normalized Cross Entropy
-
-
-### Synthetic transfer model
-
+```bash
+python src/main.py --data_path DATA_PATH -d Cars3D -ds 10 -clm CONTINUOUS_LEARNING_METHOD -m MODEL -t classification 
+```
 
 ## Disclaimer
 This is not an official Prosus product. It is the outcome of an internal research project from the Prosus AI team.
