@@ -1,0 +1,15 @@
+# Folders
+logs/
+dat/
+res/
+old/
+tmp/
+src/.idea/
+src/__pycache__/
+src/.ipynb_checkpoints
+src/.vscode
+# Extensions
+*.pyc
+*.DS_Store
+*.png
+# Files
