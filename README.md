@@ -35,7 +35,7 @@ chmod +x Cars3D/download.sh
 Render the 3D dataset with `Cars3D/render.m` script with MATLAB, or another renderer of your choice.
 
 ## Experiments
-```bash
+```
 usage: main.py [-h] [-d DATASET] [-ds DATA_SPLITS] [-s SAMPLING_METHOD]
                [-sp SPLIT_METHOD] [-mo {lenet,resnet}]
                [-clm {naive,finetune,lfl,lwf,ewc}]
