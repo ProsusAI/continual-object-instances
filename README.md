@@ -28,8 +28,7 @@ conda activate continual_objects
 ## Datasets
 Downloading the Cars3D dataset:
 ```bash
-cd ./Cars3D
-chmod +x download.sh
+chmod +x Cars3D/download.sh
 ./download.sh
 ```
 
