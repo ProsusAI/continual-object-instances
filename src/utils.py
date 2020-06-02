@@ -8,7 +8,9 @@ from collections import OrderedDict
 
 def config():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--dataset', default="Cars3D",
+    parser.add_argument('--data_path', default="../../datasets/",
+                        help="relative path to root data folder")
+    parser.add_argument('-d', '--dataset', default="Cars3D", choices=["Cars3D"],
                         help="dataset to process")
     parser.add_argument('-ds', '--data_splits', type=int, default=1,
                         help="number of equal data partitions")
@@ -24,8 +26,6 @@ def config():
                         help="benchmark or NCE approach")
     parser.add_argument('-e', '--n_epochs', type=int, default=10,
                         help="define the number of epochs")
-    parser.add_argument('--data_path', default="../../datasets/",
-                        help="root data folder")
     parser.add_argument('-o', '--output', required=True,
                         help="output folder name folder")
     parser.add_argument('-b', '--batch_size', type=int, default=128,

@@ -42,19 +42,21 @@ Render the 3D dataset with `Cars3D/render.m` script with MATLAB, or another rend
 
 ## Experiments
 ```
-usage: main.py [-h] [-d DATASET] [-ds DATA_SPLITS] [-s SAMPLING_METHOD]
-               [-sp SPLIT_METHOD] [-mo {lenet,resnet}]
+usage: main.py [-h] [--data_path DATA_PATH] [-d {Cars3D}] [-ds DATA_SPLITS]
+               [-s SAMPLING_METHOD] [-sp SPLIT_METHOD] [-mo {lenet,resnet}]
                [-clm {naive,finetune,lfl,lwf,ewc}]
-               [-t {regression,classification}] [-e N_EPOCHS]
-               [--data_path DATA_PATH] -o OUTPUT [-b BATCH_SIZE] [-l LR]
-               [-lamb LAMBDA_LFL] [-lamb_lwf LAMBDA_LWF] [-emb EMBEDDING_DIM]
-               [-im IMAGE_SIZE] [-w NUM_WORKERS] [-g GPU] [-p PRINT_EVERY]
-               [-n NEG_SAMPLES] [-temp TEMPERATURE] [-lamb_ewc LAMBDA_EWC]
-               [--normalize] [--train_full] [--freeze]
+               [-t {regression,classification}] [-e N_EPOCHS] -o OUTPUT
+               [-b BATCH_SIZE] [-l LR] [-lamb LAMBDA_LFL]
+               [-lamb_lwf LAMBDA_LWF] [-emb EMBEDDING_DIM] [-im IMAGE_SIZE]
+               [-w NUM_WORKERS] [-g GPU] [-p PRINT_EVERY] [-n NEG_SAMPLES]
+               [-temp TEMPERATURE] [-lamb_ewc LAMBDA_EWC] [--normalize]
+               [--train_full] [--freeze]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -d DATASET, --dataset DATASET
+  --data_path DATA_PATH
+                        relative path to root data folder
+  -d {Cars3D}, --dataset {Cars3D}
                         dataset to process
   -ds DATA_SPLITS, --data_splits DATA_SPLITS
                         number of equal data partitions
@@ -70,8 +72,6 @@ optional arguments:
                         benchmark or NCE approach
   -e N_EPOCHS, --n_epochs N_EPOCHS
                         define the number of epochs
-  --data_path DATA_PATH
-                        root data folder
   -o OUTPUT, --output OUTPUT
                         output folder name folder
   -b BATCH_SIZE, --batch_size BATCH_SIZE
