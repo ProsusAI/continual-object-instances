@@ -55,7 +55,7 @@ class Cars3D:
 
     def map_to_target(self, data_point):
         target = self.car2idx[data_point.split(
-            "/")[5]]
+            "/")[-2]]
         return target
 
     def load_data(self, data_point):
