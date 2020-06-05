@@ -8,11 +8,19 @@ from utils import make_directory, args
 
 
 class Cars3D:
-    def __init__(self, root, mode, transform=None, train_size=100, image_size=32, query_split=10):
+    '''
+    Pre-processing class for Cars3D dataset
+    Inputs:
+        root - relative path to data folder
+        mode - train, query or gallery set
+        train_size - number of cars in train set with all its instances
+        image_size - train image size
+        query_split - number of instances per car in query. The remaining are part of the gallery set
+    '''
+    def __init__(self, root, mode, train_size=100, image_size=32, query_split=10):
         self.data_path = os.path.join(root, "Cars3D", "images")
         self.mode = mode
         self.train = True if mode == "train" else False
-        self.transform = transform
         self.train_size = train_size
         self.query_split = query_split
 

@@ -7,6 +7,9 @@ from utils import make_directory
 
 
 class MetricSampler:
+    '''
+    Base class for sampling positive and negative samples
+    '''
     def __init__(self, train_data):
         self.train_data = train_data
         self.class_idxs, self.classes_list = self.__get_class_idxs()
@@ -26,6 +29,12 @@ class MetricSampler:
 
 
 class TripletSampler(MetricSampler):
+    '''
+    samples triplets - one positive and negatives
+    Input:
+        train_data - object of dataset class
+        neg_samples - number of negative samples 
+    '''
     def __init__(self, train_data, neg_samples):
         super().__init__(train_data)
         self.neg_samples = neg_samples
