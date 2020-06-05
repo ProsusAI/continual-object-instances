@@ -1,10 +1,16 @@
 import numpy as np
 from tqdm import tqdm
 from scipy.spatial.distance import cdist
-from utils import get_dataset_embeddings, make_directory, args
+
 import os
+import logging
 import pickle
 from collections import OrderedDict
+
+from utils import get_dataset_embeddings, make_directory, args
+from utils import print_log
+
+logger = logging.getLogger(__name__)
 
 
 RESULTS_PATH = make_directory("../{}/".format(args.output))
@@ -83,15 +89,15 @@ def evaluation(model, query_loader, gallery_loader):
     k_50 = evaluate_metrics(model, query_loader, gallery_loader, k=50)
     k_100 = evaluate_metrics(model, query_loader, gallery_loader, k=100)
     k_gallery = evaluate_metrics(model, query_loader, gallery_loader)
-    print("K=1 Recall:{} HIT:{} mAP:{}".format(
+    print_log("K=1 Recall:{} HIT:{} mAP:{}".format(
         k_1["recall"], k_1["hit"], k_1["map"]))
-    print("K=5 Recall:{} HIT:{} mAP:{}".format(
+    print_log("K=5 Recall:{} HIT:{} mAP:{}".format(
         k_5["recall"], k_5["hit"], k_5["map"]))
-    print("K=50 Recall:{} HIT:{} mAP:{}".format(
+    print_log("K=50 Recall:{} HIT:{} mAP:{}".format(
         k_50["recall"], k_50["hit"], k_50["map"]))
-    print("K=100 Recall:{} HIT:{} mAP:{}".format(
+    print_log("K=100 Recall:{} HIT:{} mAP:{}".format(
         k_100["recall"], k_100["hit"], k_100["map"]))
-    print("K=|gallery| Recall:{} HIT:{} mAP:{}".format(
+    print_log("K=|gallery| Recall:{} HIT:{} mAP:{}".format(
         k_gallery["recall"], k_gallery["hit"], k_gallery["map"]))
 
     return k_1, k_5, k_50, k_100, k_gallery

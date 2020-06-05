@@ -4,6 +4,9 @@ import torch
 import numpy as np
 import uuid
 from collections import OrderedDict
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def config():
@@ -71,6 +74,11 @@ def config():
 args = config()
 device = torch.device("cuda:{}".format(args.gpu)
                       if torch.cuda.is_available() else "cpu")
+
+
+def print_log(log):
+    print(log)
+    logger.info(log)
 
 
 def make_directory(path):
@@ -147,9 +155,9 @@ def get_partitions():
 
 def print_train_progress(epoch, train_loss, metric):
     if args.task_method == "classification":
-        print("Epoch: {} Loss: {} Accuracy: {}".format(epoch, train_loss, metric))
+        print_log("Epoch: {} Loss: {} Accuracy: {}".format(epoch, train_loss, metric))
     elif args.task_method == "regression":
-        print("Epoch: {} Loss: {} Active samples: {}".format(
+        print_log("Epoch: {} Loss: {} Active samples: {}".format(
             epoch, train_loss, metric))
     else:
         raise ValueError("Unknown task_method: {}".format(args.task_method))

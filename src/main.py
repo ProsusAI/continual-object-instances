@@ -1,5 +1,6 @@
 import torch
 from copy import deepcopy
+import logging
 
 from data_splitters import *
 from datasets import *
@@ -19,8 +20,18 @@ args = utils.config()
 print(args)
 
 experiment_name = utils.get_experiment_name()
-data_path = utils.make_directory(args.data_path)
 
+utils.make_directory("../logs")
+logging.basicConfig(
+    filename=os.path.join('../logs/{}.log'.format(experiment_name)),
+    level=logging.INFO,
+    format='%(asctime)s %(name)s %(levelname)s %(message)s'
+)
+logger = logging.getLogger(__name__)
+utils.print_log('START with Configuration : {}'.format(args))
+
+
+data_path = utils.make_directory(args.data_path)
 partitions, partitions_train, partitions_tune = utils.get_partitions()
 
 if args.dataset == "Cars3D":
@@ -50,6 +61,8 @@ query_loader, gallery_loader = get_test_loaders(query_data, gallery_data)
 metrics = initialize_metrics()
 
 for p_id in partitions_train:
+    utils.print_log("Starting partition training for id: {}".format(p_id))
+
     model = initialize_model(args.model, args.embedding_dim)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
     train_loader = get_train_loader(train_partitions[p_id])
@@ -58,7 +71,7 @@ for p_id in partitions_train:
     train(model, criterion, train_loader, query_loader, gallery_loader,
           optimizer, model_name)
 
-    print(model_name)
+    utils.print_log(model_name)
     ks = evaluation(model, query_loader, gallery_loader)
     metrics = update_metrics(ks, *metrics)
 
@@ -74,6 +87,9 @@ if args.continuous_learning_method == "ewc":
 # Fine-Tune
 if partitions_tune:
     for idx, continuous_set in enumerate(partitions_tune):
+        utils.print_log("Loading model trained on continual batch {} and training on batch {}".format(
+            continuous_set["trained"], continuous_set["tune"]))
+
         model = initialize_model(args.model, args.embedding_dim)
         model = utils.load_model(model, experiment_name +
                                  "_{}".format(continuous_set["trained"]))
@@ -91,7 +107,7 @@ if partitions_tune:
         continuous_train(old_model, model, criterion, train_loader, query_loader, gallery_loader, optimizer,
                          model_name)
 
-        print(model_name)
+        utils.print_log(model_name)
         ks = evaluation(model, query_loader, gallery_loader)
         metrics = update_metrics(ks, *metrics)
 
