@@ -130,4 +130,4 @@ Prosus is a global consumer internet group and one of the largest technology inv
 For more information, please visit [www.prosus.com](www.prosus.com).
 
 ## Contact information
-Please contact Kishan Parshotam `kishanarendra[at]gmail[dot]com` for issues and questions.
+Please contact Kishan Parshotam `kishanarendra[at]gmail[dot]com` or `ai[at]naspers[dot]com` for issues and questions.
