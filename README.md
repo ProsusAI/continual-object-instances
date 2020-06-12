@@ -23,20 +23,21 @@ If you make use of this code, please cite our work:
 ```
 
 ## Installing
-Install the dependencies by creating the Conda environment `continual_objects` from the given `environment.yml` file and activating it.
+Install the dependencies by creating the Conda environment `continual_objects` from the given `environment.yml` file and activating it. Also install Octave.
 ```bash
 conda env create -f environment.yml
 conda activate continual_objects
+sudo apt-get install octave
 ```
 
 ## Datasets
-Downloading the Cars3D dataset:
+Download and render the Cars3D dataset:
 ```bash
 chmod +x Cars3D/download.sh
 Cars3D/download.sh
 ```
 
-Render the 3D dataset with `Cars3D/render.m` script with MATLAB, or another renderer of your choice.
+The script renders the 3D dataset with `Cars3D/render.m` using Octave, if you prefer to use Matlab comment out octave and render it via Matlab.
 
 ## Experiments
 ```
@@ -105,18 +106,18 @@ optional arguments:
 
 #### Offline training
 ```bash
-python src/main.py -o OUTPUT --data_path DATA_PATH -d Cars3D -ds 1 -m MODEL -t regression
+python src/main.py -o OUTPUT --data_path DATA_PATH -d Cars3D -ds 1 -mo MODEL -t regression
 ```
 
 #### Continual training
 ```bash
-python src/main.py -o OUTPUT --data_path DATA_PATH -d Cars3D -ds 10 -clm CONTINUOUS_LEARNING_METHOD -m MODEL -t regression
+python src/main.py -o OUTPUT --data_path DATA_PATH -d Cars3D -ds 10 -clm CONTINUOUS_LEARNING_METHOD -mo MODEL -t regression
 ```
 
 
 ### Normalized Cross Entropy
 ```bash
-python src/main.py -o OUTPUT --data_path DATA_PATH -d Cars3D -ds 10 -clm CONTINUOUS_LEARNING_METHOD -m MODEL -t classification 
+python src/main.py -o OUTPUT --data_path DATA_PATH -d Cars3D -ds 10 -clm CONTINUOUS_LEARNING_METHOD -mo MODEL -t classification 
 ```
 
 
@@ -131,3 +132,4 @@ For more information, please visit [www.prosus.com](www.prosus.com).
 
 ## Contact information
 Please contact Kishan Parshotam `kishanarendra[at]gmail[dot]com` or `ai[at]naspers[dot]com` for issues and questions.
+
